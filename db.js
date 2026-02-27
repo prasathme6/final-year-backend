@@ -14,7 +14,7 @@ const app = express();
 /* ================= MIDDLEWARE ================= */
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "https://manabifinalyear.web.app",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -29,13 +29,12 @@ app.use("/profile-images", express.static("uploads/profile"));   //profile multe
 
 app.use(
   session({
-    secret: "secret",
+    secret: "secret-key",
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false,
-      maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "lax",
+      secure: true,          // REQUIRED for HTTPS
+      sameSite: "none",      // REQUIRED for cross-domain
     },
   })
 );
